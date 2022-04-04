@@ -1,6 +1,6 @@
 import random
 
-
+# checks number of rounds is infinite / more than zero
 def check_rounds():
     while True:
         response = input("How many rounds: ")
@@ -21,6 +21,7 @@ def check_rounds():
         return response
 
 
+# checks user input is valid based on a list
 def choice_checker(question, valid_list, error):
 
     error = "Please choose from rock / paper / scissors (or xxx to quit)"
@@ -53,35 +54,51 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 rounds_played = 0 
 choose_instruction = "Please choose rock (r) , paper / (p) or scissors (s) or 'xxx' to end"
 
+mode = "regular"
 
 # Ask user for # rounds, <enter> for infinite mode
 rounds = check_rounds()
+if rounds == "":
+    mode = "infinite"
+    rounds = 10
 
 end_game = "no"
 while end_game =="no":
 
     # Rounds Heading 
     print()
-    if rounds == "":
-        heading = "Infinite Mode: Round {}".format(rounds_played + 1)
-        print(heading)
-        if rounds == rounds_played == rounds + 1:
-            break
-    else: 
-        heading = "Round {} of {}".format(rounds_played + 1, rounds)
+    if mode == "infinite":
+
+        heading = "Infinite Mode: Round {}".format(rounds_played +1)
+
+    else:
+        heading = ("Round {} of {}".format(rounds_played + 1, rounds)) 
 
 
+    # get user choice
     print(heading)
     choose = choice_checker(choose_instruction, rps_list, "Please enter R / P / S")
 
 
     # End game if exit code is typed
-    if choose == rounds_played == rounds - 1:
+    if choose == "xxx":
         break
+
+    # Get the computer choice
+    comp_choice = random.choice(rps_list[:-1])
+    print("Comp Choice: ", comp_choice)
+
+    # compare choices
 
     # rest of loop / game
     print("You chose {}".format(choose))
 
-    rounds_played +=1
+    rounds_played += 1
+
+    if mode == "infinite":
+        rounds += 1
+
+    if rounds_played == rounds:
+        break
 
 print("Thank you for playing")
