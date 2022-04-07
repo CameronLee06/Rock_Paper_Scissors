@@ -9,4 +9,24 @@ for item in rps_list:
 
 
         # compare options...
+        if user_choice == comp_choice:
+            result = "tie"
         
+        elif user_choice == "rock" and comp_choice == "paper":
+            result = "lose"
+        elif user_choice == "scissors" and comp_choice == "rock":
+            result = "lose"
+        elif user_choice == "paper" and comp_choice == "scissors":
+            result = "lose"
+
+        else:
+            result = "win"
+        
+
+
+
+
+        print("You chose {}, the computer chose {}. "
+                " \nResult:  {}".format(user_choice, comp_choice, result))
+
+                
