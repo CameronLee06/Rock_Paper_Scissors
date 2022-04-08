@@ -52,6 +52,11 @@ yes_no_list = ["yes", "no"]
 rps_list = ["rock", "paper", "scissors", "xxx"]
 
 rounds_played = 0 
+
+# Rounds lost will be calculated (total - draw - win)
+rounds_won = 0
+rounds_drawn = 0
+
 choose_instruction = "Please choose rock (r) , paper / (p) or scissors (s) or 'xxx' to end"
 
 mode = "regular"
@@ -92,6 +97,7 @@ while end_game =="no":
     # compare options...
     if user_choice == comp_choice:
         result = "it's a tie"
+        rounds_drawn +=1
 
     elif user_choice == "rock" and comp_choice == "paper":
         result = "you lose"
@@ -102,6 +108,7 @@ while end_game =="no":
 
     else:
         result = "you win"
+        rounds_won +=1
 
     feedback = "{} vs {}, {}".format(user_choice, comp_choice, result)
 
@@ -115,32 +122,10 @@ while end_game =="no":
     if rounds_played == rounds:
         break
 
-    # RPS Component 6 - Scoring System
 
-# Rounds won will be calculated (total - draw - lost)
-rounds_played = 0
-rounds_lost = 0
-rounds_drawn = 0
-
-# Results for testing purposes
-test_results = ["won", "won", "loss", "loss", "tie"]
-
-# Play Game
-for item in test_results:
-    rounds_played +=1
-
-    # Generate computer choice
-
-    result = item
-
-    if result == "tie":
-        result = "Its a tie"
-        rounds_drawn +=1
-    elif result == "loss":
-        rounds_lost +=1
 
 # Quick Calculations (stats)
-rounds_won = rounds_played - rounds_lost - rounds_drawn
+rounds_lost = rounds_played - rounds_won - rounds_drawn
 
 # End of Game Statements
 print()
