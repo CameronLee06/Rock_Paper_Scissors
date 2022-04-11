@@ -1,11 +1,35 @@
-fruit_list = []
+game_summary = []
 
-for item in range (0,4):
-    fruit = input ("Fruit: ")
-    fruit_list.append(fruit)
+rounds_lost = 0
+rounds_drawn = 0
+rounds_played = 6
+
+for item in range(1,6):
+    result = input("choose result: ")
+
+    outcome = "Round {}: {}".format(item, result)
+
+    if result == "loss":
+        rounds_lost +=1
+    elif result == "tie":
+        rounds_drawn +=1
+
+    game_summary.append(outcome)
+
+rounds_won = rounds_played - rounds_lost - rounds_drawn
+
+# **** Calculate Game Stats ******
+percent_win = rounds_won / rounds_played * 100
+percent_lose = rounds_lost / rounds_played * 100
+percent_tie = rounds_drawn / rounds_played * 100
 
 print()
-print("***** The Fruit List *****")
+print ("***** Game History *****")
+for game in game_summary:
+    print(game)
 
-for item in fruit_list:
-    print(item)
+print()
+
+# displays game stats with % values to the nearest whole number
+print("******* Game Statistics *******")
+print ("Win {}, ({:.0f}%) \nLoss: {}, " "({:.0f}%) \nTIe: {}, ({:.0f}%)".format(rounds_won,percent_win,rounds_lost,percent_lose,rounds_drawn,percent_tie))
